@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Band lijst</title>
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- EIGEN SCRIPT -->
+    <script src="script.js"></script>
+</head>
+<body style="background-color: lightgray;">
+    <div class="modal-content col-8 mx-auto p-5">
+        <h1 for="" class="text-center">band list</h1><br>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal"
+                data-target="#modalToevoeg">
+            Add a band
+        </button>
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Bandname</th>
+                <th scope="col">total_members</th>
+                <th scope="col">Genre</th>
+                <th scope="col">date</th>
+                <th scope="col">Active</th>
+                <th scope="col"></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead >
+            <tbody id="hierinfo">
+                <!-- <div id="hierinfo"></div> -->
+            </tbody>
+        </table>
+
+        <!-- BEGIN MODEL TOEVOEGFORMULIER -->
+        <div class="modal fade" id="modalToevoeg" tabindex="-1" role="dialog"
+            aria-labelledby="modal1-label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal1-label">Add a band</h5>
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- in de modal-body komt de inhoud van de modal -->
+                    <div class="modal-body">
+                        <form id="maakForm" method="post" action="">
+                            <label for="active">Active</label><br>
+                            <div class="form-check form-check-inline">
+                                
+                                <label>
+                                    <input type="radio" class="form-check-input" name="active" id="active_Y" value="Y" checked>
+                                    <br>
+                                    Yes 
+                                </label>
+                                
+                                <label>
+                                    <input type="radio" class="form-check-input" name="active" id="active_N" value="N">
+                                    <br>
+                                    No
+                                </label>
+                                
+                            </div>
+                
+                            <div class="form-group">
+                                <label for="band_name">Bandname</label>
+                                <input type="text" class="form-control" name="band_name" id="band_name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="total_members">total_members</label>
+                                <input type="text" class="form-control" name="total_members" id="total_members" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="genre">Genre</label>
+                                <input type="text" class="form-control" name="genre" id="genre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="start_date">date band formed</label>
+                                <input type="text" class="form-control" name="start_date" id="start_date" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" datadismiss="modal" id="maak-close">Close</button>
+                                <button type="submit" id="nieuwOpslaan" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- EINDE MODAL TOEVOEGFORMULIER -->
+
+        <!-- BEGIN MODEL AANPASMODEL -->
+        <div class="modal fade" id="pasaanModal" tabindex="-1" role="dialog"
+            aria-labelledby="pasaanModal-label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="pasaanModal-label">Edit band</h5>
+                        <button type="button" class="close" data-dismiss="modal" id="aanpas-close"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- in de modal-body komt de inhoud van de modal -->
+                    <div class="modal-body">
+                        <form id="aanpasForm" method="post" action="">
+                            <div id="aanpasInfo"></div>
+                            <input type="number" class="form-control" name="id" id="id" value="" hidden>
+                            <label for="active">Active</label><br>
+                            <div class="form-check form-check-inline">
+                                
+                                <label>
+                                    <input type="radio" class="form-check-input" name="active" id="active_Y" value="Y" checked>
+                                    <br>
+                                    Yes 
+                                </label>
+                                
+                                <label>
+                                    <input type="radio" class="form-check-input" name="active" id="active_N" value="N">
+                                    <br>
+                                    No
+                                </label>
+                                
+                            </div>
+                
+                            <div class="form-group">
+                                <label for="band_name">Bandname</label>
+                                <input type="text" class="form-control" name="band_name" id="band_name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="members">Members</label>
+                               
+                            </div>
+                            <div class="form-group" id="members-add"></div>
+                            <div class="form-group">
+                                <label for="genre">Genre</label>
+                                <input type="text" class="form-control" name="genre" id="genre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="start_date">date band formed</label>
+                                <input type="text" class="form-control" name="start_date" id="start_date" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" datadismiss="modal" id="aanpas-close">Close</button>
+                                <button type="submit" id="aanpas-close" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- EINDE MODAL AANPASMODEL -->
+        
+        <!-- BEGIN MODEL VERWIJDERMODEL -->
+        <div class="modal fade" id="verwijderModal" tabindex="-1" role="dialog"
+            aria-labelledby="verwijderModal-label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="verwijderModal-label">Lid verwijderen</h5>
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- in de modal-body komt de inhoud van de modal -->
+                    <div class="modal-body">
+                        <div id="verwijderInfo"></div><br>
+                        <form id="verwijderForm" method="post" action="">
+                            <input type="number" class="form-control" name="id" id="id" value="" hidden>
+                            <h1 class="form-group text-center" id="band_name"></h1>
+                            <h3 class="form-group text-center" id="members"></h3>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" datadismiss="modal" aria-label="Close" id="verwijder-close">Sluiten</button>
+                                <button type="submit" name="verwijderOpslaan" id="verwijderOpslaan" class="btn btn-danger">Verwijder</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- EINDE MODAL VERWIJDERMODEL -->
+
+    </div>
+</body>
+</html>

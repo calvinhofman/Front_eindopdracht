@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- EIGEN SCRIPT -->
+    <script src="script.js"></script>
+</head>
+<body>
+    <button type="button" class="btn btn-primary" data-toggle="modal"
+            data-target="#modalToevoeg">
+        Nieuw lid inschrijven
+    </button>
+    <div id="hierinfo"></div>
+
+    <!-- BEGIN MODEL TOEVOEGFORMULIER -->
+    <div class="modal fade" id="modalToevoeg" tabindex="-1" role="dialog"
+         aria-labelledby="modal1-label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal1-label">Nieuw lid inschrijven</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- in de modal-body komt de inhoud van de modal -->
+                <div class="modal-body">
+                    <form id="maakForm" method="post" action="">
+            
+                        <div class="form-check form-check-inline">
+                            <label>
+                                <input type="radio" class="form-check-input" name="gender" id="gender_m" value="M" checked>
+                                <br>
+                                M 
+                            </label>
+                            
+                            <label>
+                                <input type="radio" class="form-check-input" name="gender" id="gender_f" value="F">
+                                <br>
+                                F
+                            </label>
+                        </div>
+            
+                        <div class="form-group">
+                            <label for="first_name">Voornaam</label>
+                            <input type="text" class="form-control" name="first_name" id="first_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Achternaam</label>
+                            <input type="text" class="form-control" name="last_name" id="last_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="birth_date">Geboortedatum</label>
+                            <input type="date" class="form-control" name="birth_date" id="birth_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="member_since">Lid sinds</label>
+                            <input type="date" class="form-control" name="member_since" id="member_since" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" datadismiss="modal" id="maak-close">Sluiten</button>
+                            <button type="submit" id="nieuwOpslaan" class="btn btn-primary">Opslaan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- EINDE MODAL TOEVOEGFORMULIER -->
+
+    <!-- BEGIN MODEL AANPASMODEL -->
+    <div class="modal fade" id="pasaanModal" tabindex="-1" role="dialog"
+         aria-labelledby="pasaanModal-label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pasaanModal-label">Lid bewerken</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- in de modal-body komt de inhoud van de modal -->
+                <div class="modal-body">
+                    <form id="aanpasForm" method="post" action="">
+                        <div id="aanpasInfo"></div>
+                        <input type="number" class="form-control" name="id" id="id" value="" hidden>
+                        <div class="form-check form-check-inline">
+                            <label>
+                                <input type="radio" class="form-check-input" name="gender" id="gender_m" value="M"> 
+                                <br>
+                                M
+                            </label>
+                            
+                            <label>
+                                <input type="radio" class="form-check-input" name="gender" id="gender_f" value="F"> 
+                                <br>
+                                F
+                            </label>
+                        </div>
+            
+                        <div class="form-group">
+                            <label for="first_name">Voornaam</label>
+                            <input type="text" class="form-control" name="first_name" id="first_name" value="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Achternaam</label>
+                            <input type="text" class="form-control" name="last_name" id="last_name" value="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="birth_date">Geboortedatum</label>
+                            <input type="date" class="form-control" name="birth_date" id="birth_date" value="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="member_since">Lid sinds</label>
+                            <input type="date" class="form-control" name="member_since" id="member_since" value="" required>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" datadismiss="modal" aria-label="Close" id="aanpas-close">Sluiten</button>
+                            <button type="submit" name="aanpasOpslaan" id="aanpasOpslaan" class="btn btn-primary">Opslaan</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- EINDE MODAL AANPASMODEL -->
+    
+    <!-- BEGIN MODEL VERWIJDERMODEL -->
+    <div class="modal fade" id="verwijderModal" tabindex="-1" role="dialog"
+         aria-labelledby="verwijderModal-label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="verwijderModal-label">Lid verwijderen</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- in de modal-body komt de inhoud van de modal -->
+                <div class="modal-body">
+                    <div id="verwijderInfo"></div><br>
+                    <form id="verwijderForm" method="post" action="">
+                        <input type="number" class="form-control" name="id" id="id" value="" hidden>
+                        <h1 class="form-group text-center" id="name"></h1>
+                        <h3 class="form-group text-center" id="member_since"></h3>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" datadismiss="modal" aria-label="Close" id="verwijder-close">Sluiten</button>
+                            <button type="submit" name="verwijderOpslaan" id="verwijderOpslaan" class="btn btn-danger">Verwijder</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- EINDE MODAL VERWIJDERMODEL -->
+</body>
+</html>
